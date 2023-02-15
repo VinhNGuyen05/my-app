@@ -2,7 +2,7 @@ import React from "react";
 
 const EditTableRow = ({
   student,
-  editFormData,
+  formEditData,
   handleEditFormChange,
   handleCancelClick,
 }) => {
@@ -14,7 +14,7 @@ const EditTableRow = ({
           required="required"
           placeholder="Enter a name..."
           name="fullName"
-          value={editFormData.fullName}
+          value={formEditData.fullName}
           onChange={handleEditFormChange}
         ></input>
       </td>
@@ -24,7 +24,7 @@ const EditTableRow = ({
           required="required"
           placeholder="Enter an age..."
           name="age"
-          value={editFormData.age}
+          value={formEditData.age}
           onChange={handleEditFormChange}
         ></input>
       </td>

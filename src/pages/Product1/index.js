@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import List from "./List";
+import List from "./components/List";
 import { Link } from "react-router-dom";
 import "./index.css"
 import data from "./mock-data.json";

@@ -1,89 +1,90 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import { nanoid } from "nanoid";
-import ReadOnly from "./ReadOnly";
-import EditTableRow from "./EditTableRow";
+import ReadOnly from "./components/ReadOnly";
+import EditTableRow from "./components/EditTableRow";
 import "./index.css";
 
+localStorage.setItem('students', JSON.stringify([]));
+
 const Student = () => {
-  const [students, setstudents] = useState(JSON.parse(localStorage.getItem('students'))); // get from local storage
-  const [addFormData, setAddFormData] = useState({
-    fullName: "",
-    age: "",
+  const [students, setStudents] = useState(JSON.parse(localStorage.getItem('students'))); // get from local storage
+  const [studentId, setStudentId] = useState(null);
+  const [studentEdit, setStudentEdit] = useState({
     id: "",
-  });
-  const [editFormData, setEditFormData] = useState({
     fullName: "",
-    age: "",
-    id: "",
-  });
-  const [editstudentId, setEditstudentId] = useState(null);
+    age: ""
+  })
 
   useEffect(() => {
     localStorage.setItem('students', JSON.stringify(students)); // set to local storage
   },[students]); 
 
-  const handleAddFormChange = (event) => {
+  const handleValidate = (event) => {
     event.preventDefault();
-    const fieldName = event.target.getAttribute("name");
-    const fieldValue = event.target.value;
-    const newFormData = {...addFormData };
-    newFormData[fieldName] = fieldValue;
-    setAddFormData(newFormData);
+    if(event.target[0].value === "" && event.target[1].value !== ""){
+      alert("name");
+    }else if (event.target[0].value !== "" && event.target[1].value === ""){
+      alert("age");
+    }else if (event.target[0].value === "" && event.target[1].value === ""){
+      alert("name");
+      alert("age");
+    }else{
+      handleAddFormSubmit(event.target[0].value, event.target[1].value);
+    }
+  }
+
+  const handleAddFormSubmit = (name, age) => {
+    const newstudent = {
+      id: nanoid(),
+      fullName: name,
+      age: age,
+    };
+    const newstudents = [...students, newstudent];
+    setStudents(newstudents);
+  };
+
+  const handleEditClick = (event, student) => {
+    event.preventDefault();
+    setStudentId(student.id);
+    const formValues = {
+      fullName: student.fullName,
+      age: student.age,
+    };
+    setStudentEdit(formValues);
   };
 
   const handleEditFormChange = (event) => {
     event.preventDefault();
     const fieldName = event.target.getAttribute("name");
     const fieldValue = event.target.value;
-    const newFormData = { ...editFormData };
+    const newFormData = { ...studentEdit };
     newFormData[fieldName] = fieldValue;
-    setEditFormData(newFormData);
-  };
-
-  const handleAddFormSubmit = (event) => {
-    event.preventDefault();
-    const newstudent = {
-      id: nanoid(),
-      fullName: addFormData.fullName,
-      age: addFormData.age,
-    };
-    const newstudents = [...students, newstudent];
-    setstudents(newstudents);
+    setStudentEdit(newFormData);
   };
 
   const handleEditFormSubmit = (event) => {
     event.preventDefault();
     const editedstudent = {
-      id: editstudentId,
-      fullName: editFormData.fullName,
-      age: editFormData.age,
+      id: studentId,
+      fullName: event.target[0].value,
+      age: event.target[1].value,
     };
     const newstudents = [...students];
-    const index = students.findIndex((student) => student.id === editstudentId);
+    const index = students.findIndex((student) => student.id === studentId);
     newstudents[index] = editedstudent;
-    setstudents(newstudents);
-    setEditstudentId(null);
+    setStudents(newstudents);
+    setStudentId(null);
   };
-
-  const handleEditClick = (event, student) => {
-    event.preventDefault();
-    setEditstudentId(student.id);
-    const formValues = {
-      fullName: student.fullName,
-      age: student.age,
-    };
-    setEditFormData(formValues);
-  };
-
+  
   const handleCancelClick = () => {
-    setEditstudentId(null);
+    setStudentId(null);
   };
 
   const handleDeleteClick = (studentId) => {
     const newstudents = [...students];
     const index = students.findIndex((student) => student.id === studentId);
     newstudents.splice(index, 1);
-    setstudents(newstudents);
+    setStudents(newstudents);
   };
 
   let average = (props) => {
@@ -100,24 +101,19 @@ const Student = () => {
   return (
     <div>
       <h2>Add a Student</h2>
-      <form onSubmit={handleAddFormSubmit}>
+      <form onSubmit={handleValidate}>
         <input
           type="text"
-          name="fullName"
-          required="required"
           placeholder="Enter a name..."
-          onChange={handleAddFormChange}
         />
         <input
           type="number"
-          name="age"
-          required="required"
           placeholder="Enter an age..."
-          onChange={handleAddFormChange}
         />
         <button type="submit">Add</button>
       </form>
       <br />
+
       <form onSubmit={handleEditFormSubmit}>
         <table>
           <thead>
@@ -129,10 +125,10 @@ const Student = () => {
           <tbody>
             {students.map((student) => (
               <>
-                {editstudentId === student.id ? (
+                {studentId === student.id ? (
                   <EditTableRow
                     student={student}
-                    editFormData={editFormData}
+                    formEditData={studentEdit}
                     handleEditFormChange={handleEditFormChange}
                     handleCancelClick={handleCancelClick}
                   />

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import List from "./List";
+import List from "./components/List";
 
 const BASE_URL = "https://dummyjson.com/products";
 
