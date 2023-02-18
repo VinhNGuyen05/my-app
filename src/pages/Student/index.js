@@ -64,7 +64,9 @@ const Student = () => {
     dispatch(remove(studentId));
   };
 
-  const average = arr => arr.reduce( ( p, c ) => p.age + c.age, 0 ) / arr.length;
+  const sum = list.reduce((accumulator, object) => {
+    return accumulator + object.age;
+  }, 0);
 
   return (
     <div>
@@ -105,7 +107,7 @@ const Student = () => {
             ))}
             <tr>
               <td>Averae age</td>
-              <td>{average(list)}</td>
+              <td>{sum / list.length}</td>
               <td></td>
             </tr>
           </tbody>
