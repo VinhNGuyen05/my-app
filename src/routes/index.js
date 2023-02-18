@@ -1,6 +1,6 @@
-import Product1 from "../features/Product1";
-import Product2 from "../features/Product2";
-import Student from "../features/Student";
+import Product1 from "../pages/Product1";
+import Product2 from "../pages/Product2";
+import Student from "../pages/Student";
 
 const publicRoutes = [
     {
