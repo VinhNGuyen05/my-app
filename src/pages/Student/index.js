@@ -65,7 +65,7 @@ const Student = () => {
   };
 
   const sum = list.reduce((accumulator, object) => {
-    return accumulator + object.age;
+    return accumulator + parseInt(object.age);
   }, 0);
 
   return (
