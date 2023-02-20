@@ -1,18 +1,20 @@
-import Headers from "./Headers";
-import SideBar from "./SideBar";
-import React from "react";
-import "./index.css";
+import './index.css';
+
+import React from 'react';
+
+import Headers from './Headers';
+import SideBar from './SideBar';
 
 function DefaultLayout({ children }) {
   return (
     <div>
       <Headers />
       
-      <div class="sidenav">
+      <div className="sidenav">
         <SideBar />
       </div>
 
-      <div class="main">{children}</div>
+      <div className="main">{children}</div>
     </div>
   );
 }

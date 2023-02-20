@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import List from "./components/List";
+import React, { useEffect, useState } from 'react';
+import List from './components/List';
 
-const BASE_URL = "https://dummyjson.com/products";
+const BASE_URL = 'https://dummyjson.com/products';
 
 const Product2 = () => {
   const [product, setProduct] = useState({ products: [] });

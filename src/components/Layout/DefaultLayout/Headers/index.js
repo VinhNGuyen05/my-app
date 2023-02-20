@@ -1,13 +1,13 @@
-import "./index.css";
-import logo from "../../../../assets/images/logo.png";
+import './index.css';
+import logo from '../../../../assets/images/logo.png';
 
 function Headers() {
   return (
-    <div class="header">
+    <div className="header">
       <a href="/">
-        <img class="img" src={logo} alt="logo" />
+        <img alt="logo" className="img" src={logo} />
       </a>
-      <p class="info">
+      <p className="info">
         Vinh Nguyen <br />
         emailkhongco@mailg.com
       </p>

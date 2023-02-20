@@ -1,9 +1,9 @@
-import React from "react";
-import "./list.css";
+import React from 'react';
+import './list.css';
 
 function List(props) {
   return (
-    <table class="fixed_header ">
+    <table className="fixed_header">
       <thead>
         <tr>
           <th>Title</th>
@@ -14,7 +14,7 @@ function List(props) {
         </tr>
       </thead>
       <tbody>
-        {props.product.products.map((item) => (
+        {props.product.products.map(item => (
           <tr key={item.id}>
             <td>{item.title}</td>
             <td>{item.category}</td>

@@ -1,17 +1,20 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { add, edit, remove } from "../../actions/studentActions";
-import { nanoid } from "nanoid";
-import ReadOnly from "./components/ReadOnly";
-import EditTableRow from "./components/EditTableRow";
-import "./index.css";
+import './index.css';
+
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { add, edit, remove } from '../../actions/studentActions';
+import { nanoid } from 'nanoid';
+
+import ReadOnly from './components/ReadOnly';
+import EditTableRow from './components/EditTableRow';
 
 const Student = () => {
-  const list = useSelector((state) => state.students);
+  const list = useSelector(state => state.students);
   const [studentId, setStudentId] = useState(null);
   const [studentEdit, setStudentEdit] = useState({
-    id: "",
-    fullName: "",
+    id: '',
+    fullName: '',
     age: 0,
   });
   const dispatch = useDispatch();
