@@ -3,7 +3,7 @@ import './index.css'
 import { Link } from 'react-router-dom';
 
 import List from './components/List';
-import data from './mock-data.json';
+import data from '../../assets/data/mock-data.json';
 
 const BASE_URL = 'https://dummyjson.com/products';
 
