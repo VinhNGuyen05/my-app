@@ -1,30 +1,43 @@
-import './index.css';
+import "./index.css";
 
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import { add, edit, remove } from '../../actions/studentActions';
-import { nanoid } from 'nanoid';
+import { add, edit, remove } from "../../actions/studentActions";
+import { nanoid } from "nanoid";
 
-import ReadOnly from './components/ReadOnly';
-import EditTableRow from './components/EditTableRow';
+import ReadOnly from "./components/ReadOnly";
+import EditTableRow from "./components/EditTableRow";
 
 const Student = () => {
-  const list = useSelector(state => state.students);
+  const list = useSelector((state) => state.students);
   const [studentId, setStudentId] = useState(null);
   const [studentEdit, setStudentEdit] = useState({
-    id: '',
-    fullName: '',
+    id: "",
+    fullName: "",
     age: 0,
   });
   const dispatch = useDispatch();
 
-  const handleAddFormSubmit = (event) => {
+  const handleValidate = (event) => {
     event.preventDefault();
+    if (event.target[0].value === "" && event.target[1].value !== "") {
+      alert("name");
+    } else if (event.target[0].value !== "" && event.target[1].value === "") {
+      alert("age");
+    } else if (event.target[0].value === "" && event.target[1].value === "") {
+      alert("name");
+      alert("age");
+    } else {
+      handleAddFormSubmit(event.target[0].value, event.target[1].value);
+    }
+  };
+
+  const handleAddFormSubmit = (name, age) => {
     const newStudent = {
       id: nanoid(),
-      fullName: event.target[0].value,
-      age: event.target[1].value,
+      fullName: name,
+      age: age,
     };
     dispatch(add(newStudent));
   };
@@ -74,7 +87,7 @@ const Student = () => {
   return (
     <div>
       <h2>Add a Student</h2>
-      <form onSubmit={handleAddFormSubmit}>
+      <form onSubmit={handleValidate}>
         <input type="text" placeholder="Enter a name..." />
         <input type="number" placeholder="Enter an age..." />
         <button type="submit">Add</button>
