@@ -9,7 +9,6 @@ const BASE_URL = 'https://dummyjson.com/products';
 
 const Product1 = () => {
   const [product, setProduct] = useState({ products: [] });
-
   const fetchData = () => {
     fetch(`${BASE_URL}?limit=5`)
       .then(res => res.json())

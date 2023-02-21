@@ -1,14 +1,10 @@
-export const defaultStudents = [
-  {
-    id: "1",
-    fullName: "a",
-    age: 4,
-  },
-  {
-    id: "2",
-    fullName: "b",
-    age: 4,
-  },
-];
+import { createStore} from "redux";
+import studentsApp from "../reducers/studentReducer";
+
+export const stores = createStore(studentsApp);
+
+export default stores;
+
+
 
 

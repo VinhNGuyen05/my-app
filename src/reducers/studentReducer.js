@@ -1,9 +1,21 @@
 import { combineReducers } from 'redux';
-import { defaultStudents } from '../stores/store';
 
 const ADD_STUDENT = 'ADD_STUDENT';
 const EDIT_STUDENT = 'EDIT_STUDENT';
 const REMOVE_STUDENT = 'REMOVE_STUDENT';
+
+const defaultStudents = [
+  {
+    id: "1",
+    fullName: "a",
+    age: 4,
+  },
+  {
+    id: "2",
+    fullName: "b",
+    age: 4,
+  },
+];
 
 function students(state = defaultStudents, action) {
   switch (action.type) {
